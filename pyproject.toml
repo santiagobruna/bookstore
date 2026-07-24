@@ -16,8 +16,13 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest (>=8.4.2,<9.0.0)",
+    "pytest-django (>=4.11.1,<5.0.0)",
     "factory-boy (>=3.3.3,<4.0.0)"
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "bookstore.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
 
 
 [build-system]
