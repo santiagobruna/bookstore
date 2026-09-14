@@ -2,8 +2,10 @@ import json
 
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 
+from order.factories import UserFactory
 from product.factories import ProductFactory
 
 
@@ -11,6 +13,9 @@ class TestPagination(APITestCase):
     client = APIClient()
 
     def setUp(self):
+        self.user = UserFactory()
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         # PAGE_SIZE = 5 → cria 6 produtos para forçar uma segunda página
         self.products = [ProductFactory() for _ in range(6)]
 
