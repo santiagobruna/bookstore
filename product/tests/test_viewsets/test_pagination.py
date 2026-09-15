@@ -20,9 +20,7 @@ class TestPagination(APITestCase):
         self.products = [ProductFactory() for _ in range(6)]
 
     def test_product_list_is_paginated(self):
-        response = self.client.get(
-            reverse("product-list", kwargs={"version": "v1"})
-        )
+        response = self.client.get(reverse("product-list", kwargs={"version": "v1"}))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

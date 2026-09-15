@@ -26,9 +26,7 @@ class TestOrderViewSet(APITestCase):
     def test_get_all_order(self):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
 
-        response = self.client.get(
-            reverse("order-list", kwargs={"version": "v1"})
-        )
+        response = self.client.get(reverse("order-list", kwargs={"version": "v1"}))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -43,9 +41,7 @@ class TestOrderViewSet(APITestCase):
         )
 
     def test_order_requires_authentication(self):
-        response = self.client.get(
-            reverse("order-list", kwargs={"version": "v1"})
-        )
+        response = self.client.get(reverse("order-list", kwargs={"version": "v1"}))
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
