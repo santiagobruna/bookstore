@@ -44,3 +44,19 @@ Docker && docker-compose
    ```shell
    docker-compose exec web python manage.py test
    ```
+
+## Continuous Delivery (Render)
+
+The app is deployed on Render. On every push to `main`, GitHub Actions runs tests and triggers a Render deploy.
+
+### Setup
+
+1. On Render → your Web Service → **Settings** → **Deploy Hook** → copy the URL
+2. On GitHub → repo **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+   - Name: `RENDER_DEPLOY_HOOK`
+   - Value: the deploy hook URL
+3. Optional: disable **Auto-Deploy** on Render to avoid double deploys (Actions will trigger deploys)
+
+### Manual deploy
+
+In GitHub Actions, run the workflow **Deploy to Render** with **Run workflow**.
